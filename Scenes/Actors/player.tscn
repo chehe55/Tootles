@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8dtacbufg72r"]
+
+[ext_resource type="Texture2D" uid="uid://dw2jcgbjx1hg8" path="res://Art/Turtles/player1.PNG" id="2_fkybt"]
+[ext_resource type="Texture2D" uid="uid://di0xy2mrorfkw" path="res://Art/Turtles/player2.PNG" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://y18p65by2l3g" path="res://Art/Turtles/player3.PNG" id="4_3smsa"]
+[ext_resource type="Texture2D" uid="uid://dswr7t4satuop" path="res://Art/Turtles/player5.PNG" id="5_0by00"]
+[ext_resource type="Texture2D" uid="uid://b8sykj27xhcqm" path="res://Art/Turtles/player6.PNG" id="6_yffqf"]
+[ext_resource type="Texture2D" uid="uid://l3tvoh3cn162" path="res://Art/Turtles/player4.PNG" id="7_8j2b5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2hs0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x3wgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3smsa")
+}],
+"loop": true,
+"name": &"forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fkybt")
+}],
+"loop": true,
+"name": &"forward_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0by00")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yffqf")
+}],
+"loop": true,
+"name": &"side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_8j2b5")
+}],
+"loop": true,
+"name": &"side_idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b2ja5"]
+radius = 118.041
+height = 250.08
+
+[node name="Player" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 2)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_2hs0m")
+animation = &"side_idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(-300, 0)
+limit_top = -325
+limit_bottom = 325
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = -1.57987
+shape = SubResource("CapsuleShape2D_b2ja5")

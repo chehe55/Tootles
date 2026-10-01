@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://diwnj1ruiwhed"]
+
+[ext_resource type="Script" uid="uid://dpot1ihwpepei" path="res://Scripts/Player Controllers/lane_player.gd" id="1_fm7w6"]
+[ext_resource type="Texture2D" uid="uid://dswr7t4satuop" path="res://Art/Turtles/player5.PNG" id="2_sd87v"]
+[ext_resource type="Texture2D" uid="uid://b8sykj27xhcqm" path="res://Art/Turtles/player6.PNG" id="3_ksa0q"]
+[ext_resource type="Texture2D" uid="uid://bosdeiqpecob1" path="res://Art/Turtles/shield2.PNG" id="4_5vokg"]
+[ext_resource type="Texture2D" uid="uid://c21xw3qkcytxy" path="res://Art/Turtles/damage1.PNG" id="4_ictqy"]
+[ext_resource type="Texture2D" uid="uid://l3tvoh3cn162" path="res://Art/Turtles/player4.PNG" id="5_4e28h"]
+[ext_resource type="Texture2D" uid="uid://4stal45dr7q3" path="res://Art/Turtles/shield3.PNG" id="5_t0354"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x0otn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sd87v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ksa0q")
+}],
+"loop": true,
+"name": &"forward",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5vokg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_t0354")
+}],
+"loop": true,
+"name": &"shield",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ictqy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4e28h")
+}],
+"loop": true,
+"name": &"takeDamage",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sd87v"]
+radius = 6200.0
+height = 12400.0
+
+[node name="LanePlayer" type="CharacterBody2D"]
+script = ExtResource("1_fm7w6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5, -1)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_x0otn")
+animation = &"shield"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(587, 12)
+zoom = Vector2(0.9, 0.9)
+limit_top = -325
+limit_right = 8896
+limit_bottom = 322
+position_smoothing_enabled = true
+position_smoothing_speed = 0.9
+drag_horizontal_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4.99994, 8)
+scale = Vector2(0.025, 0.025)
+shape = SubResource("CapsuleShape2D_sd87v")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(4.99994, 8)
+scale = Vector2(0.025, 0.025)
+shape = SubResource("CapsuleShape2D_sd87v")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

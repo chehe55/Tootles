@@ -1,0 +1,96 @@
+[gd_scene load_steps=15 format=3 uid="uid://bjd7seaagil6w"]
+
+[ext_resource type="Texture2D" uid="uid://bgjmpcrakfig5" path="res://Art/Backgrounds/youdied.PNG" id="1_8npfu"]
+[ext_resource type="Script" path="res://Scripts/Scene Changers/game_over_2.gd" id="1_mhqpn"]
+[ext_resource type="Script" uid="uid://cun1p466irp0i" path="res://Scripts/Scene Changers/RestartTwoScript.gd" id="1_vwusu"]
+[ext_resource type="Texture2D" uid="uid://b2r54leispy7v" path="res://Art/UI/tryagain2.PNG" id="3_my2kx"]
+[ext_resource type="Texture2D" uid="uid://dax4as35uy4u0" path="res://Art/UI/tryagain1.PNG" id="4_dxs8r"]
+[ext_resource type="Texture2D" uid="uid://bkuvskvpqlire" path="res://Art/UI/bubbles5.PNG" id="4_k843t"]
+[ext_resource type="Texture2D" uid="uid://c5igbn5nyj310" path="res://Art/UI/bubbles6.PNG" id="5_mhqpn"]
+[ext_resource type="Texture2D" uid="uid://dq08r0i5h6t12" path="res://Art/UI/bubbles7.PNG" id="6_my2kx"]
+[ext_resource type="Texture2D" uid="uid://yh4u6463vn7h" path="res://Art/UI/bubbles8.PNG" id="7_dxs8r"]
+[ext_resource type="AudioStream" uid="uid://r17o7ylsiiw0" path="res://Art/Sound/dead dead.mp3" id="10_dxs8r"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1ekyw"]
+texture = ExtResource("3_my2kx")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ihryo"]
+texture = ExtResource("3_my2kx")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hr8ws"]
+texture = ExtResource("4_dxs8r")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ekyw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_k843t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mhqpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_my2kx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dxs8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_my2kx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mhqpn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Control2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mhqpn")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+scale = Vector2(0.24, 0.24)
+mouse_filter = 2
+texture = ExtResource("1_8npfu")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -246.0
+offset_top = 111.0
+offset_right = 620.0
+offset_bottom = 299.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+theme_override_font_sizes/font_size = 45
+theme_override_styles/hover = SubResource("StyleBoxTexture_1ekyw")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_ihryo")
+theme_override_styles/normal = SubResource("StyleBoxTexture_hr8ws")
+script = ExtResource("1_vwusu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(550, 322)
+scale = Vector2(0.24, 0.24)
+sprite_frames = SubResource("SpriteFrames_1ekyw")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_dxs8r")
+volume_db = 5.0
+autoplay = true
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

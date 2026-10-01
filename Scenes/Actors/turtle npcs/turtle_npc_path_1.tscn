@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://darjitam7q7ar"]
+
+[ext_resource type="Script" uid="uid://bwi76v815uegq" path="res://Scripts/Actor Controllers/npc1.gd" id="1_hm661"]
+[ext_resource type="Texture2D" uid="uid://1ecwgtbecsb" path="res://Art/Turtles/npc3.PNG" id="2_e6n6e"]
+[ext_resource type="Texture2D" uid="uid://drlylvadu7x7x" path="res://Art/Turtles/npc2.PNG" id="2_s8wy3"]
+
+[sub_resource type="Curve2D" id="Curve2D_e6rgk"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 801.203, 464.47, 202.269, -19.5744, -202.269, 19.5744, 290, 349, 155.326, -14.5619, -155.326, 14.5619, -24, 431, 264.254, 19.5744, -264.254, -19.5744, -577, 267, 231.63, 22.8368, -231.63, -22.8368, -1312, 499, 186.717, -103.638, -186.717, 103.638, -2099, 323, 0, 0, 0, 0, -2656, 339)
+}
+point_count = 7
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yx6du"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s8wy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_e6n6e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2r6vf"]
+radius = 55.4062
+height = 129.769
+
+[node name="turtle_npc_path1" type="Path2D"]
+curve = SubResource("Curve2D_e6rgk")
+
+[node name="npc1" type="PathFollow2D" parent="."]
+position = Vector2(801.203, 464.47)
+rotation = -2.91944
+script = ExtResource("1_hm661")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="npc1"]
+rotation = -3.14159
+scale = Vector2(0.13, 0.13)
+sprite_frames = SubResource("SpriteFrames_yx6du")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="npc1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="npc1/StaticBody2D"]
+position = Vector2(0.0812378, -0.561707)
+rotation = -1.51341
+shape = SubResource("CapsuleShape2D_2r6vf")

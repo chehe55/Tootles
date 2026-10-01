@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://r17o7ylsiiw0"
+path="res://.godot/imported/dead dead.mp3-f58c6cb763711797ed766ee5eb6bc58f.mp3str"
+
+[deps]
+
+source_file="res://Art/Sound/dead dead.mp3"
+dest_files=["res://.godot/imported/dead dead.mp3-f58c6cb763711797ed766ee5eb6bc58f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

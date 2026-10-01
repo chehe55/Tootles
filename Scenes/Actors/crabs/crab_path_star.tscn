@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmucvwlwhy25s"]
+
+[ext_resource type="PackedScene" uid="uid://dhc2r0qbywp5a" path="res://Scenes/Actors/crabs/crab.tscn" id="1_55gqr"]
+
+[sub_resource type="Curve2D" id="Curve2D_1ur43"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 586, 235, 0, 0, 0, 0, 691, -5, 0, 0, 0, 0, 819, 208, 0, 0, 0, 0, 1128, 271, 0, 0, 0, 0, 887, 427, 0, 0, 0, 0, 1024, 687, 0, 0, 0, 0, 724, 573, 0, 0, 0, 0, 451, 722, 0, 0, 0, 0, 522, 452, 0, 0, 0, 0, 222, 326, 0, 0, 0, 0, 586, 238)
+}
+point_count = 11
+
+[node name="crab_path1" type="Path2D"]
+position = Vector2(-54, 18)
+curve = SubResource("Curve2D_1ur43")
+
+[node name="crab" parent="." instance=ExtResource("1_55gqr")]
+position = Vector2(586, 235)
+rotation = -1.15839

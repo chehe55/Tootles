@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://p1qlbvt3xdvv"]
+
+[ext_resource type="Script" uid="uid://ckoj2nsv4q6ia" path="res://Scripts/Actor Controllers/LightBallScript.gd" id="1_bionw"]
+[ext_resource type="Texture2D" uid="uid://bej15i006ttoy" path="res://Art/Lightmonster/light1.png" id="3_adw70"]
+[ext_resource type="Texture2D" uid="uid://dcwg6wgtn0o5w" path="res://Art/Lightmonster/light2.png" id="4_1s1st"]
+[ext_resource type="Texture2D" uid="uid://b1pdkhg8he2cl" path="res://Art/Lightmonster/light3.png" id="5_1nlth"]
+[ext_resource type="Texture2D" uid="uid://do2d3wpwmraqk" path="res://Art/Lightmonster/light4.png" id="6_8jxi8"]
+[ext_resource type="Texture2D" uid="uid://ca8een0dsd1or" path="res://Art/Lightmonster/light5.png" id="7_4vub6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ibjoy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_adw70"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_adw70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1s1st")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1nlth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8jxi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4vub6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" groups=["Damaging"]]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_bionw")
+
+[node name="Hitbox" type="Area2D" parent="."]
+scale = Vector2(6.75, 6.75)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ibjoy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.19, 0.19)
+sprite_frames = SubResource("SpriteFrames_adw70")
+autoplay = "default"
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

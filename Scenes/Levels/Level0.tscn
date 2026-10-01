@@ -1,0 +1,169 @@
+[gd_scene load_steps=14 format=3 uid="uid://cegyfmu4rh3co"]
+
+[ext_resource type="PackedScene" uid="uid://cjmm0hpgt2ar6" path="res://Scenes/Actors/Players/player.tscn" id="1_mfl2e"]
+[ext_resource type="Texture2D" uid="uid://c65b2iq5u11r2" path="res://Art/Backgrounds/bgscene0.PNG" id="1_prorm"]
+[ext_resource type="AudioStream" uid="uid://b8l1ma8k5o8bw" path="res://Art/Sound/turtlesong.mp3" id="1_w28ii"]
+[ext_resource type="PackedScene" uid="uid://dx8270oygylr3" path="res://Scenes/Actors/turtle npcs/turtle_npc_path_2.tscn" id="3_prorm"]
+[ext_resource type="PackedScene" uid="uid://darjitam7q7ar" path="res://Scenes/Actors/turtle npcs/turtle_npc_path_1.tscn" id="4_prorm"]
+[ext_resource type="Script" uid="uid://75i6y13dg77d" path="res://Scripts/Scene Changers/Cutscene1TriggerScript.gd" id="5_t27ic"]
+[ext_resource type="FontFile" uid="uid://qmiw7imgkwrh" path="res://Art/UI/Nunito-VariableFont_wght.ttf" id="6_es8ky"]
+[ext_resource type="Texture2D" uid="uid://cbwgydoacyidw" path="res://Art/UI/wasd.png" id="7_cpnto"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prorm"]
+size = Vector2(124, 795)
+
+[sub_resource type="Animation" id="Animation_cpnto"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["hello this is level 0"]
+}
+
+[sub_resource type="Animation" id="Animation_es8ky"]
+resource_name = "text"
+length = 6.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 2.75, 3.5, 5, 5.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": ["follow ur siblings", "get to the ocean"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w28ii"]
+_data = {
+&"RESET": SubResource("Animation_cpnto"),
+&"text": SubResource("Animation_es8ky")
+}
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cpnto"]
+
+[node name="level0" type="Node2D"]
+
+[node name="Turtlesong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_w28ii")
+autoplay = true
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-1291, 0)
+scale = Vector2(0.553498, 0.62)
+texture = ExtResource("1_prorm")
+
+[node name="wasd" type="Sprite2D" parent="."]
+position = Vector2(0, -200)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("7_cpnto")
+
+[node name="Player" parent="." instance=ExtResource("1_mfl2e")]
+position = Vector2(0, 7)
+scale = Vector2(0.5, 0.5)
+
+[node name="turtle_npc_path1" parent="." instance=ExtResource("4_prorm")]
+position = Vector2(-940, -299)
+
+[node name="turtle_npc_path2" parent="." instance=ExtResource("3_prorm")]
+position = Vector2(-198, -651)
+
+[node name="Trigger" type="Area2D" parent="."]
+script = ExtResource("5_t27ic")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+position = Vector2(-1742, 2)
+shape = SubResource("RectangleShape2D_prorm")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -202.0
+offset_top = -159.0
+offset_right = 202.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("6_es8ky")
+theme_override_font_sizes/font_size = 50
+text = "hello this is level 0"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_w28ii")
+}
+autoplay = "text"
+
+[node name="Boundaries" type="Node2D" parent="."]
+
+[node name="RightBoundry" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(277, 0)
+rotation = 4.71239
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/RightBoundry"]
+shape = SubResource("WorldBoundaryShape2D_cpnto")
+
+[node name="TopBoundry" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(0, -326)
+rotation = 3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/TopBoundry"]
+shape = SubResource("WorldBoundaryShape2D_cpnto")
+
+[node name="BottomBoundry" type="StaticBody2D" parent="Boundaries"]
+position = Vector2(0, 323)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundaries/BottomBoundry"]
+shape = SubResource("WorldBoundaryShape2D_cpnto")
+
+[connection signal="area_entered" from="Trigger" to="Trigger" method="_on_area_entered"]

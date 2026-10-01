@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://dty405ancld2y"]
+
+[ext_resource type="PackedScene" uid="uid://diwnj1ruiwhed" path="res://Scenes/Actors/Players/LanePlayer.tscn" id="1_5jgm0"]
+[ext_resource type="PackedScene" uid="uid://c4w0r7sxmxvtn" path="res://Scenes/Actors/Ball Stuff/LightBallSpawner.tscn" id="1_36ke7"]
+[ext_resource type="Script" uid="uid://dq286b0uf25o6" path="res://Scripts/Actor Controllers/BallManagerScript.gd" id="1_riv1q"]
+[ext_resource type="Texture2D" uid="uid://cmxjr1emk2mkp" path="res://Art/Backgrounds/bg_scene1.PNG" id="3_xvio3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvio3"]
+size = Vector2(250, 1452)
+
+[node name="Node2D2" type="Node2D"]
+
+[node name="LightBallManager" type="Node2D" parent="."]
+position = Vector2(-43, 7)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_riv1q")
+
+[node name="Spawner1" parent="LightBallManager" instance=ExtResource("1_36ke7")]
+position = Vector2(-1600, -216)
+
+[node name="Spawner2" parent="LightBallManager" instance=ExtResource("1_36ke7")]
+position = Vector2(-1600, -81)
+
+[node name="Spawner3" parent="LightBallManager" instance=ExtResource("1_36ke7")]
+position = Vector2(-1600, 54)
+
+[node name="Spawner4" parent="LightBallManager" instance=ExtResource("1_36ke7")]
+position = Vector2(-1600, 189)
+
+[node name="Spawner5" parent="LightBallManager" instance=ExtResource("1_36ke7")]
+position = Vector2(-1600, 324)
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1760, -9)
+texture = ExtResource("3_xvio3")
+
+[node name="LanePlayer" parent="." instance=ExtResource("1_5jgm0")]
+position = Vector2(-450, -216)
+scale = Vector2(0.5, 0.5)
+
+[node name="BallDeleter" type="Area2D" parent="LanePlayer"]
+position = Vector2(2174, 498)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LanePlayer/BallDeleter"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_xvio3")
+
+[node name="shieldTimer" type="Timer" parent="LanePlayer"]
+
+[node name="coolDownTimer" type="Timer" parent="LanePlayer"]
+wait_time = 9.0
+
+[node name="damageTimer" type="Timer" parent="LanePlayer"]
+
+[connection signal="timeout" from="LanePlayer/shieldTimer" to="LanePlayer" method="_on_shield_timer_timeout"]
+[connection signal="timeout" from="LanePlayer/coolDownTimer" to="LanePlayer" method="_on_cool_down_timer_timeout"]
+[connection signal="timeout" from="LanePlayer/damageTimer" to="LanePlayer" method="_on_damage_timer_timeout"]

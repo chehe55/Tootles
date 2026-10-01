@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhc2r0qbywp5a"]
+
+[ext_resource type="Script" uid="uid://cbkwigvr3gopl" path="res://Scripts/Actor Controllers/crab.gd" id="1_pn25u"]
+[ext_resource type="Texture2D" uid="uid://d1looa8vhfoww" path="res://Art/Predators/crab2.PNG" id="2_1rahm"]
+[ext_resource type="Texture2D" uid="uid://07mgwt87w6ry" path="res://Art/Predators/crab3.PNG" id="3_c6i32"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pn25u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1rahm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c6i32")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="crab" type="PathFollow2D"]
+script = ExtResource("1_pn25u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.13, 0.13)
+sprite_frames = SubResource("SpriteFrames_pn25u")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(36, 55, 54, 34, 49, 14, 45, 3, 68, -13, 65, -43, 41, -52, 39, -34, 0, -29, -39, -32, -42, -53, -64, -46, -68, -15, -45, 2, -51, 11, -56, 34, -37, 54, 0, 40, 36, 55)

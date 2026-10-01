@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2gceqyeum35d"]
+
+[sub_resource type="Shader" id="Shader_cctgt"]
+code = "/*
+	Camera Shake Effect Shader by @Near
+
+	MIT License
+*/
+
+shader_type canvas_item;
+uniform float ShakeStrength = 0;
+uniform vec2 FactorA  = vec2(100.0,100.0);
+uniform vec2 FactorB  = vec2(1.0,1.0);
+uniform vec2 magnitude = vec2(0.01,0.01);
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+
+void fragment() {
+    vec2 uv = SCREEN_UV;
+	uv -= 0.5;
+    uv *= 1.0 - 2.0 * magnitude.x;
+    uv += 0.5;
+	vec2 dt = vec2(0.0, 0.0);
+	dt.x = sin(TIME * FactorA.x+FactorB.x) * magnitude.x;
+	dt.y = cos(TIME *FactorA.y+ FactorB.y) * magnitude.y;
+	COLOR = texture(SCREEN_TEXTURE,uv + (dt*ShakeStrength));
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_es8ky"]
+shader = SubResource("Shader_cctgt")
+shader_parameter/ShakeStrength = 0.2
+shader_parameter/FactorA = Vector2(25, 25)
+shader_parameter/FactorB = Vector2(1, 1)
+shader_parameter/magnitude = Vector2(0.01, 0.01)
+
+[node name="ScreenShake" type="ColorRect"]
+material = SubResource("ShaderMaterial_es8ky")
+offset_left = -846.0
+offset_top = -437.0
+offset_right = 369.0
+offset_bottom = 416.0

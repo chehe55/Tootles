@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4w0r7sxmxvtn"]
+
+[ext_resource type="Script" uid="uid://dpbwvc0u2k71o" path="res://Scripts/Actor Controllers/SpawnerScript.gd" id="1_mlvfi"]
+
+[node name="LightBallSpawner" type="Node2D"]
+script = ExtResource("1_mlvfi")

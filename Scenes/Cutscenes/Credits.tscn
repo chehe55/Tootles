@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://cqbgdpn0sow33"]
+
+[ext_resource type="Script" path="res://Scripts/Scene Changers/RestartGameScript.gd" id="1_c3mb1"]
+[ext_resource type="Texture2D" uid="uid://b3nygdprsekcl" path="res://Art/Backgrounds/creditscene.PNG" id="1_mjjw8"]
+[ext_resource type="FontFile" uid="uid://qmiw7imgkwrh" path="res://Art/UI/Nunito-VariableFont_wght.ttf" id="2_wbwrm"]
+[ext_resource type="AudioStream" uid="uid://b8l1ma8k5o8bw" path="res://Art/Sound/turtlesong.mp3" id="4_mjjw8"]
+
+[sub_resource type="Animation" id="Animation_wbwrm"]
+resource_name = "CreditsScroll"
+length = 13.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1806.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["SHARC STUDIO
+
+Sherry Xu
+Halves Beyer
+Annabelle Pan
+Rachel Ngo
+Chang He
+
+
+A SPECIAL THANKS TO
+
+Ian Petersen
+Qinzhao Li
+
+
+
+
+
+
+
+THANKS FOR PLAYING"]
+}
+
+[sub_resource type="Animation" id="Animation_nsgds"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera2D:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["credits"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjjw8"]
+_data = {
+&"CreditsScroll": SubResource("Animation_wbwrm"),
+&"RESET": SubResource("Animation_nsgds")
+}
+
+[node name="Credits" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.22668e-09, -5557)
+rotation = 1.5708
+scale = Vector2(1.1, 1.1)
+texture = ExtResource("1_mjjw8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-3, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mjjw8")
+}
+autoplay = "CreditsScroll"
+speed_scale = 0.4
+script = ExtResource("1_c3mb1")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -371.0
+offset_top = 2.0
+offset_right = 372.0
+offset_bottom = 1981.37
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_wbwrm")
+theme_override_font_sizes/font_size = 70
+text = "credits"
+horizontal_alignment = 1
+
+[node name="Turtlesong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mjjw8")
+autoplay = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="AnimationPlayer" method="_on_animation_finished"]

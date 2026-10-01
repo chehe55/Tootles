@@ -1,0 +1,99 @@
+[gd_scene load_steps=15 format=3 uid="uid://b50pjgxwwbqji"]
+
+[ext_resource type="Texture2D" uid="uid://bkia61dt56yba" path="res://Art/Backgrounds/startscreen.PNG" id="1_b42ut"]
+[ext_resource type="Script" uid="uid://v8fi7kbf73il" path="res://Scripts/Scene Changers/StartScript.gd" id="1_v3fht"]
+[ext_resource type="Texture2D" uid="uid://douevnga0yiao" path="res://Art/UI/divein1.PNG" id="2_pbd8g"]
+[ext_resource type="Texture2D" uid="uid://tov0e31kws11" path="res://Art/UI/bubbles1.PNG" id="4_q15nq"]
+[ext_resource type="Texture2D" uid="uid://djhcvq0lhkrdh" path="res://Art/UI/bubbles2.PNG" id="5_pbd8g"]
+[ext_resource type="Texture2D" uid="uid://3snpyq8o7gp8" path="res://Art/UI/bubbles3.PNG" id="6_7as8u"]
+[ext_resource type="Texture2D" uid="uid://nibt6t4j0ypn" path="res://Art/UI/bubbles4.PNG" id="7_ts2fx"]
+[ext_resource type="AudioStream" uid="uid://b8l1ma8k5o8bw" path="res://Art/Sound/turtlesong.mp3" id="8_pbd8g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7as8u"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pbd8g"]
+load_path = "res://.godot/imported/divein2.PNG-cf5ea897ec4c5ae70b0dc4007ac1e27d.ctex"
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ts2fx"]
+texture = SubResource("CompressedTexture2D_pbd8g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8w8b8"]
+texture = SubResource("CompressedTexture2D_pbd8g")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7as8u"]
+texture = ExtResource("2_pbd8g")
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8w8b8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_q15nq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pbd8g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7as8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ts2fx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7as8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pbd8g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 4800.0
+offset_bottom = 2700.0
+scale = Vector2(0.24, 0.24)
+texture = ExtResource("1_b42ut")
+
+[node name="Button" type="Button" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -286.0
+offset_top = 108.0
+offset_right = 3948.0
+offset_bottom = 1715.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.07, 0.07)
+theme_override_font_sizes/font_size = 45
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7as8u")
+theme_override_styles/hover = SubResource("StyleBoxTexture_ts2fx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_8w8b8")
+theme_override_styles/normal = SubResource("StyleBoxTexture_7as8u")
+script = ExtResource("1_v3fht")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(578, 323)
+scale = Vector2(0.24, 0.24)
+sprite_frames = SubResource("SpriteFrames_8w8b8")
+autoplay = "default"
+frame_progress = 0.187406
+
+[node name="Turtlesong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_pbd8g")
+autoplay = true
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

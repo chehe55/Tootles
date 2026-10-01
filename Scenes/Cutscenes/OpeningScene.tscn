@@ -1,0 +1,100 @@
+[gd_scene load_steps=22 format=3 uid="uid://dk831bpd55xxs"]
+
+[ext_resource type="Texture2D" uid="uid://cnt6xnuggjahj" path="res://Art/Cutscenes/Cutscene0/1.jpeg" id="1_74c7y"]
+[ext_resource type="Script" uid="uid://bhavto5gb0kj0" path="res://Scripts/Scene Changers/Cutscene0Script.gd" id="1_bdugn"]
+[ext_resource type="Texture2D" uid="uid://clhh5j63l8o5n" path="res://Art/Cutscenes/Cutscene0/2.jpeg" id="2_7rhjb"]
+[ext_resource type="Texture2D" uid="uid://d10vys6hgadm0" path="res://Art/Cutscenes/Cutscene0/3.jpeg" id="3_r5lan"]
+[ext_resource type="Texture2D" uid="uid://beegxo2ybcug" path="res://Art/Cutscenes/Cutscene0/4.jpeg" id="4_yjiyu"]
+[ext_resource type="Texture2D" uid="uid://ely470kuhvrd" path="res://Art/Cutscenes/Cutscene0/5.jpeg" id="5_ctvdq"]
+[ext_resource type="Texture2D" uid="uid://npl2aqtwnh43" path="res://Art/Cutscenes/Cutscene0/6.jpeg" id="6_soyia"]
+[ext_resource type="Texture2D" uid="uid://bwu666s7rapgh" path="res://Art/Cutscenes/Cutscene0/7.jpeg" id="7_yegcg"]
+[ext_resource type="Texture2D" uid="uid://dpe4iwmx50a4f" path="res://Art/Cutscenes/Cutscene0/8.jpeg" id="8_ppemi"]
+[ext_resource type="Texture2D" uid="uid://byf2jue0s14e" path="res://Art/Cutscenes/Cutscene0/9.jpeg" id="9_3r77t"]
+[ext_resource type="Texture2D" uid="uid://da8p7h2djjg7q" path="res://Art/Cutscenes/Cutscene0/10.jpeg" id="10_ccs8t"]
+[ext_resource type="Texture2D" uid="uid://odgtqkidxynx" path="res://Art/Cutscenes/Cutscene0/11.jpeg" id="11_la6nq"]
+[ext_resource type="Texture2D" uid="uid://bly881owegwoy" path="res://Art/Cutscenes/Cutscene0/12.jpeg" id="12_p6rct"]
+[ext_resource type="Texture2D" uid="uid://cx3jbsfet8yix" path="res://Art/Cutscenes/Cutscene0/13.jpeg" id="13_rag8p"]
+[ext_resource type="Texture2D" uid="uid://bdcbnk472rf5t" path="res://Art/Cutscenes/Cutscene0/15.jpeg" id="15_sppb4"]
+[ext_resource type="Texture2D" uid="uid://c3m3l7imivluw" path="res://Art/Cutscenes/Cutscene0/16.jpeg" id="16_ocvnv"]
+[ext_resource type="Texture2D" uid="uid://d0gc70j08p7ad" path="res://Art/Cutscenes/Cutscene0/17.jpeg" id="17_jg4ir"]
+[ext_resource type="Texture2D" uid="uid://k63ftvmfp4pa" path="res://Art/Cutscenes/Cutscene0/18.jpeg" id="18_ya32c"]
+[ext_resource type="Script" uid="uid://bwo3gd3oqk6rn" path="res://Scripts/cutscenecamera.gd" id="19_74c7y"]
+[ext_resource type="AudioStream" uid="uid://h7y2vjx1yj2p" path="res://Art/Sound/egg(final final final final final).mp3" id="20_7rhjb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f333s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_74c7y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7rhjb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_r5lan")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yjiyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ctvdq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_soyia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yegcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ppemi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3r77t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ccs8t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_la6nq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_p6rct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_rag8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_sppb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ocvnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_jg4ir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ya32c")
+}],
+"loop": false,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="Node2D2" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.422133, 0.42215)
+sprite_frames = SubResource("SpriteFrames_f333s")
+autoplay = "default"
+script = ExtResource("1_bdugn")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("19_74c7y")
+
+[node name="eggSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_7rhjb")
+volume_db = 5.0
+autoplay = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="Camera2D" method="_on_animated_sprite_2d_frame_changed"]

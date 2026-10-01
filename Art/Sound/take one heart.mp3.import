@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://374ehucbokin"
+path="res://.godot/imported/take one heart.mp3-c16a9ad1d535b38488f81952f46ca98a.mp3str"
+
+[deps]
+
+source_file="res://Art/Sound/take one heart.mp3"
+dest_files=["res://.godot/imported/take one heart.mp3-c16a9ad1d535b38488f81952f46ca98a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
